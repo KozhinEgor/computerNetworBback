@@ -24,6 +24,17 @@ public class EquipmentController {
 
     @PutMapping("/Equipment")
     public Equipment putEquipment(@RequestBody Equipment equipment){
+
+
         return equipmentRepository.save(equipment);
+    }
+
+    @PostMapping("/equipmentCreate")
+    public List<Equipment> createEquipment(@RequestBody Otdel otdel){
+        Equipment eq = new Equipment();
+        eq.setName("Новое оборудование");
+        eq.setOtdel(otdel);
+        equipmentRepository.save(eq);
+        return equipmentRepository.findAllByOtdel(otdel);
     }
 }

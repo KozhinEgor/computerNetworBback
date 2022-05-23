@@ -48,4 +48,10 @@ public class UserController {
         List<User> users = userRepository.findUserByOtdel(otdel);
         return users;
     }
+
+    @GetMapping("/findUser")
+    public List<User> findUser(){
+        List<User> users = userRepository.findAll();
+        return users;
+    }
 }
