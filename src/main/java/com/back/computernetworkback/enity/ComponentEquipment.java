@@ -23,7 +23,7 @@ public class ComponentEquipment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_component")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Component component;
+    private Component comp;
 
     @JsonProperty("number")
     private Long number;

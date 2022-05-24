@@ -33,7 +33,7 @@ public class Component {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_category_component")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Equipment equipment;
+    private CategoryComponent categoryComponent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_vendor")
