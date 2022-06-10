@@ -6,12 +6,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "component", schema = "computernetwork")
-public class Component {
+@Table(name = "program_key", schema = "computernetwork")
+public class ProgramKey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
@@ -20,17 +19,17 @@ public class Component {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("characteristick")
-    private String characteristick;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_category_component")
+    @JoinColumn(name="program")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private CategoryComponent categoryComponent;
+    private Program program;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_vendor")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Vendor vendor;
+    @JsonProperty("value")
+    private String value;
 
+    @JsonProperty("date_start")
+    private LocalDate date_start;
+
+    @JsonProperty("date_finish")
+    private LocalDate date_finish;
 }
