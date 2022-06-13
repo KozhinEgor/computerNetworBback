@@ -1,13 +1,12 @@
 package com.back.computernetworkback.controller;
 
-import com.back.computernetworkback.enity.Component;
-import com.back.computernetworkback.enity.Sklad;
+import com.back.computernetworkback.enity.*;
+import com.back.computernetworkback.repository.CategoryComponentRepository;
 import com.back.computernetworkback.repository.ComponentRepository;
 import com.back.computernetworkback.repository.SkladRepository;
+import com.back.computernetworkback.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
@@ -22,6 +21,12 @@ public class ComponentController {
     @Autowired
     private SkladRepository skladRepository;
 
+    @Autowired
+    private VendorRepository vendorRepository;
+
+    @Autowired
+    private CategoryComponentRepository categoryComponentRepository;
+
 //    @GetMapping("findAllFreeComponents")
 //    public List<Component> findAllFreeComponents(){
 //       Query
@@ -30,8 +35,31 @@ public class ComponentController {
     public List<Component> findAllFreeComponents(){
        return componentRepository.findAll();
     }
+
     @GetMapping("/findFreeComponent")
     public List<Sklad> findFreeComponent(){
+        return skladRepository.findAll();
+    }
+
+    @GetMapping("/findAllVendor")
+    public List<Vendor> findAllVendor(){return vendorRepository.findAll();}
+
+    @GetMapping("/findAllCategoryComponent")
+    public List<CategoryComponent> findAllCategoryComponent(){return categoryComponentRepository.findAll();}
+
+    @PostMapping("/saveComponent")
+    public List<Component> saveComponent(@RequestBody Component component){
+        componentRepository.save(component);
+        return componentRepository.findAll();
+    }
+    @PostMapping("/updateSklad")
+    public List<Sklad> updateSklad(@RequestBody Sklad sklad){
+        if(sklad.getNumber() == null){
+            skladRepository.delete(sklad);
+        }
+        else {
+            skladRepository.save(sklad);
+        }
         return skladRepository.findAll();
     }
 

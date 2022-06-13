@@ -45,7 +45,7 @@ public class UserController {
 
     @PostMapping("/findUserByOtdel")
     public List<User> findUserByOtdel(@RequestBody Otdel otdel){
-        List<User> users = userRepository.findUserByOtdel(otdel);
+        List<User> users = userRepository.findAllByOtdel(otdel);
         return users;
     }
 
@@ -54,4 +54,28 @@ public class UserController {
         List<User> users = userRepository.findAll();
         return users;
     }
+
+    @PostMapping("/findCountUserByOtdel")
+    public Integer findCountUserByOtdel(@RequestBody Otdel otdel){
+        return userRepository.findAllByOtdel(otdel).size();
+    }
+
+    @PostMapping("/saveUser")
+    public User saveUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
+    @PostMapping("/createUser")
+    public List<User> createUser(@RequestBody Otdel otdel){
+        User user = new User();
+        user.setDolzhnost("");
+        user.setEmail("");
+        user.setFio("Новый пользователь");
+        user.setOtdel(otdel);
+        user.setPassword("");
+        user.setRole("");
+        user.setId(null);
+        userRepository.save(user);
+        return userRepository.findAllByOtdel(otdel);
+    }
+
 }
