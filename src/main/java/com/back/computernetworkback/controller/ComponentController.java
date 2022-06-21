@@ -63,4 +63,11 @@ public class ComponentController {
         return skladRepository.findAll();
     }
 
+    @PostMapping("/createVendor")
+    public  Vendor createVendor(@RequestBody String a){
+        Vendor categoryEquipment = new Vendor();
+        categoryEquipment.setName(a);
+        return vendorRepository.save(categoryEquipment);
+    }
+
 }
