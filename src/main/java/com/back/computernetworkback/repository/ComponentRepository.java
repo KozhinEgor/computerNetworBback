@@ -10,4 +10,5 @@ import java.util.List;
 @NoRepositoryBean
 public interface ComponentRepository extends JpaRepository<Component,Integer> {
     List<Component> findFreeComponent();
+    List<Component> findComponentNoSklad();
 }

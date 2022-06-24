@@ -11,4 +11,7 @@ public interface ComponentEquipmentRepository extends JpaRepository<ComponentEqu
 
  List<ComponentEquipment> findAllByEquipment(Equipment equipment);
  List<ComponentEquipment> findAllByEquipmentAndComp(Equipment equipment, Component component);
+
+
+
 }

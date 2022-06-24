@@ -42,12 +42,11 @@ public class EquipmentController {
     }
 
     @PostMapping("/equipmentCreate")
-    public List<Equipment> createEquipment(@RequestBody Otdel otdel){
+    public Equipment createEquipment(@RequestBody Otdel otdel){
         Equipment eq = new Equipment();
         eq.setName("Новое оборудование");
         eq.setOtdel(otdel);
-        equipmentRepository.save(eq);
-        return equipmentRepository.findAllByOtdel(otdel);
+        return equipmentRepository.save(eq);
     }
 
     @PostMapping("/razobrat")

@@ -34,4 +34,14 @@ public class ComponentRepositorImpl extends SimpleJpaRepository<Component,Intege
         query.select(programKeyRoot).where(predicates);
         return entityManager.createQuery(query).getResultList();
     }
+
+    @Override
+    public List<Component> findComponentNoSklad() {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Component> query = builder.createQuery(Component.class);
+        Root<Component> programKeyRoot = query.from(Component.class);
+        Predicate predicates =programKeyRoot.get("id").in(sklad.findAll().stream().map(b -> b.getComponent().getId()).collect(Collectors.toList())).not();
+        query.select(programKeyRoot).where(predicates);
+        return entityManager.createQuery(query).getResultList();
+    }
 }

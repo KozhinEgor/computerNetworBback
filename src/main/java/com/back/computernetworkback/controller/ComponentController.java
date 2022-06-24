@@ -41,6 +41,18 @@ public class ComponentController {
         return skladRepository.findAll();
     }
 
+    @GetMapping("/findComponentNoSklad")
+    public List<Component> findComponentNoSklad(){
+        return componentRepository.findComponentNoSklad();
+    }
+    @PostMapping("/addToSklad")
+    public Sklad addToSklad(@RequestBody Component component){
+        Sklad sklad = new Sklad();
+        sklad.setNumber(0L);
+        sklad.setComponent(component);
+        return skladRepository.save(sklad);
+    }
+
     @GetMapping("/findAllVendor")
     public List<Vendor> findAllVendor(){return vendorRepository.findAll();}
 
