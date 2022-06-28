@@ -1,11 +1,13 @@
 package com.back.computernetworkback.enity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,4 +34,8 @@ public class ProgramKey {
 
     @JsonProperty("date_finish")
     private LocalDate date_finish;
+
+    @OneToMany(mappedBy = "programKey", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties({"programKey"})
+    private List<ProgramEquipment> programEquipment;
 }

@@ -3,6 +3,7 @@ package com.back.computernetworkback.controller;
 import com.back.computernetworkback.enity.*;
 import com.back.computernetworkback.repository.ProgramEquipmentRepository;
 import com.back.computernetworkback.repository.ProgramKeyRepository;
+import com.back.computernetworkback.repository.ProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,11 @@ public class ProgramConroller {
     private ProgramKeyRepository programKeyRepository;
 
     @Autowired
+    private ProgramRepository programRepository;
+
+    @Autowired
     private ProgramEquipmentRepository programEquipmentRepository;
+
 
     @GetMapping("/findFreeProgramKeys")
     public List<ProgramKey> findFreeProgramKeys(){
@@ -40,5 +45,14 @@ public class ProgramConroller {
         programEquipment.setId(null);
         programEquipmentRepository.save(programEquipment);
         return programEquipmentRepository.findAllByEquipment(programEquipment.getEquipment());
+    }
+
+    @GetMapping("/programReestr")
+    List<ProgramKey> programReestr(){
+            return programKeyRepository.findReestr();
+    }
+    @GetMapping("/programs")
+    List<Program> programs(){
+        return programRepository.findAll();
     }
 }

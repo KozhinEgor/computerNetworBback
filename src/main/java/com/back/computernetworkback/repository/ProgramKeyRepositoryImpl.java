@@ -1,6 +1,5 @@
 package com.back.computernetworkback.repository;
 
-import com.back.computernetworkback.enity.ProgramEquipment;
 import com.back.computernetworkback.enity.ProgramKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -31,6 +30,15 @@ public class ProgramKeyRepositoryImpl extends SimpleJpaRepository<ProgramKey,Int
         Root<ProgramKey> programKeyRoot = query.from(ProgramKey.class);
         Predicate predicates =programKeyRoot.get("id").in(findAll.findAll().stream().map(b -> b.getProgramKey().getId()).collect(Collectors.toList())).not();
         query.select(programKeyRoot).where(predicates);
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<ProgramKey> findReestr(){
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ProgramKey> query = builder.createQuery(ProgramKey.class);
+        Root<ProgramKey> programKeyRoot = query.from(ProgramKey.class);
+        query.select(programKeyRoot);
         return entityManager.createQuery(query).getResultList();
     }
 }
