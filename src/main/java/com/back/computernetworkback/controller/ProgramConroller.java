@@ -55,4 +55,18 @@ public class ProgramConroller {
     List<Program> programs(){
         return programRepository.findAll();
     }
+
+    @PostMapping("/saveProgramKey")
+    public ProgramKey saveProgram(@RequestBody ProgramKey programKey){
+        if(programKey.getId() == 0){
+            programKey.setId(null);
+        }
+        return programKeyRepository.save(programKey);
+    }
+    @PostMapping("/saveProgram")
+    public Program addProgram(@RequestBody String name){
+        Program program = new Program();
+        program.setName(name);
+        return programRepository.save(program);
+    }
 }
